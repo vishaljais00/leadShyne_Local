@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { setCookie } from 'cookies-next';
 import { useRouter } from 'next/router'
 import { useSelector, useDispatch } from 'react-redux'
-import { adminMode } from '../../store/dbModeSlice'
+import { adminMode, clearMode } from '../../store/dbModeSlice'
 import { LoggedIn, LoggedOut } from '../../store/adMinLoginSlice'
 import axios from 'axios';
 import { Baseurl } from '../../Utils/Constants'
@@ -38,6 +38,7 @@ const LoginScreen = ({ isLoggedIn, setisLoggedIn }) => {
                     "password": userForm.password
                 })
                 if (res.status === 200) {
+                    dispatch(clearMode())
                     dispatch(adminMode())
                     dispatch(LoggedIn())
                     setCookie('Admin', 'true');

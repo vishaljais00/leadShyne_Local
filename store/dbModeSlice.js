@@ -14,10 +14,13 @@ export const dbModeSlice = createSlice({
         },
         adminMode: (state) => {
             state.value = 'admin'
-        }
+        },
+        clearMode: (state) => {
+            state.value = ''
+        },
     },
 })
 
-export const { masterMode, userMode, adminMode } = dbModeSlice.actions
+export const { masterMode, userMode, adminMode, clearMode } = dbModeSlice.actions
 
 export default dbModeSlice.reducer

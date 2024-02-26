@@ -15,6 +15,7 @@ import { userLogOut } from '../../store/ClientLoginSlice'
 import Link from 'next/link';
 import { Baseurl, filesUrl } from '../../Utils/Constants';
 import axios from 'axios';
+import { clearMode } from '../../store/dbModeSlice';
 
 const Topnav = () => {
     const router = useRouter()
@@ -27,9 +28,11 @@ const Topnav = () => {
         const isAdminMode = dbMode === 'admin';
         const isMasterOrUserMode = dbMode === 'master' || dbMode === 'user';
 
+    
         setshowConfirm(!showConfirm);
-        router.push(isAdminMode ? '/Admin' : '/');
+        dispatch(clearMode())
         dispatch(isAdminMode ? LoggedOut() : userLogOut());
+        router.push(isAdminMode ? '/Admin' : '/');
         toast.success('Logged Out Successfully');
     };
 

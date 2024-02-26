@@ -6,8 +6,9 @@ import { hasCookie, getCookie } from 'cookies-next';
 import { adminMode } from '../store/dbModeSlice'
 import AdminDashboard from '../Components/SuperAdminScreen/AdminDashboard';
 import { LoggedIn } from '../store/adMinLoginSlice'
+import withAdmin from '../HOC/Withhoc';
 
-export default function Products() {
+function Products() {
 
     const dispatch = useDispatch()
     const adminLogin = useSelector((state) => state.adminLogin.value)
@@ -45,3 +46,5 @@ export default function Products() {
         </>
     )
 }
+
+export default withAdmin(Products)
