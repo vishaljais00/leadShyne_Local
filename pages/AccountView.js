@@ -3,7 +3,7 @@ import SideBar from '../Components/Basics/SideBar'
 import Topnav from '../Components/Basics/Topnav'
 import AccountViewScreen from '../Components/AccountScreens/AccountViewScreen'
 
-export default function AccountView() {
+function AccountView() {
   return (
     <>
       <Head>
@@ -22,3 +22,5 @@ export default function AccountView() {
     </>
   )
 }
+
+export default AccountView(AccountView);

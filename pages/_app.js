@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Head from 'next/head';
 import Topnav from '../Components/Basics/Topnav';
 import SideBar from '../Components/Basics/SideBar';
-import { hasCookie } from 'cookies-next';
+import { getCookie, hasCookie } from 'cookies-next';
 import { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
@@ -17,17 +17,14 @@ import { connect } from 'react-redux';
 function App({ Component, pageProps }) {
 
   const user = store.getState().userLogin;
-  const admin = store.getState().dbMode;
-  const Isadmin = store.getState().adminLogin;
   const [showBasic, setShowBasic] = useState(false)
-  const [showUser, setShowUser] = useState("")
+
  
   const checkUSer = () => {
     if(hasCookie("user")){
       setShowBasic(true)
-      setShowUser('user')
     }else if(hasCookie("Admin")){
-      setShowUser('Admin')
+      setShowBasic(false)
     }else{
       setShowBasic(false)
     }
@@ -36,8 +33,8 @@ function App({ Component, pageProps }) {
   useEffect(() => {
     checkUSer()
   }, [user]);
-    
-  
+
+
   return (
     <>
       <Head>
@@ -66,11 +63,9 @@ function App({ Component, pageProps }) {
               <Topnav />
            
             <div className="content_wrapper">
-             
-                <SideBar isactive='dashboard' mode='admin' />
-             
                
-
+                <SideBar   />
+             
                 <Component {...pageProps} />
               
                   </div>

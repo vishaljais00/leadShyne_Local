@@ -3,6 +3,7 @@ import themeReducer from '../store/themeSlice'
 import dbModeReducer from '../store/dbModeSlice'
 import adMinLoginReducer from '../store/adMinLoginSlice'
 import userloginreducer from '../store/ClientLoginSlice'
+import isActiveSliceReducer from '../store/isActiveSidebarSlice'
 import sideViewSlice from './sideViewSlice'
 
 export const store = configureStore({
@@ -11,7 +12,8 @@ export const store = configureStore({
         dbMode:dbModeReducer,
         adminLogin: adMinLoginReducer,
         userLogin: userloginreducer,
-        sideView: sideViewSlice
+        sideView: sideViewSlice,
+        isActiveSlice: isActiveSliceReducer
     },
     
 })

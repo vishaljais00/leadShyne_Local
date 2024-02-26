@@ -19,12 +19,14 @@ import { userLogOut } from "../../store/ClientLoginSlice";
 import { hasCookie, getCookie, setCookie, deleteCookie } from "cookies-next";
 import { Baseurl, filesUrl } from "../../Utils/Constants";
 
-const SideBar = ({ isactive, mode }) => {
+const SideBar = ({ }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [currActiveLink, setcurrActiveLink] = useState('');
   const dbMode = useSelector((state) => state.dbMode.value);
   const sideView = useSelector((state) => state.sideView.value);
+  const isactiveValue = useSelector((state) => state.isActiveSlice.value);
+  const [isactive, setIsActive] = useState(hasCookie("isActive")? getCookie("isActive"): 'dashboard')
   const [userInfo, setUserInfo] = useState({});
   const [userData, setUserData] = useState({});
   const [dynamicFields, setDynamicFields] = useState([]);
@@ -158,6 +160,10 @@ const SideBar = ({ isactive, mode }) => {
     }
   }, [dbMode, sidebarLoaded])
 
+  useEffect(()=>{
+    console.log("isactiveValue", isactiveValue)
+    setIsActive(hasCookie("isActive")? getCookie("isActive"): isactiveValue)
+  },[isactiveValue])
   return (
     <div className={`sideWrapper ${sideView}`}>
       <div className="hamburgerIcon">
