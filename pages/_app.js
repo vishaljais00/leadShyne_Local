@@ -49,16 +49,7 @@ function App({ Component, pageProps }) {
       
       <Provider store={store}>
         <SSRProvider>
-        {showBasic ?
-          <main className="main_wrapper">
-           
-              <Topnav />
-           
-            <div className="content_wrapper">
-             
-                <SideBar isactive='dashboard' mode='admin' />
-             
-                <ToastContainer
+        <ToastContainer
                   position="top-right"
                   autoClose={500}
                   limit={1}
@@ -69,6 +60,16 @@ function App({ Component, pageProps }) {
                   draggable
                   pauseOnHover
                   theme="light" />
+        {showBasic ?
+          <main className="main_wrapper">
+           
+              <Topnav />
+           
+            <div className="content_wrapper">
+             
+                <SideBar isactive='dashboard' mode='admin' />
+             
+               
 
                 <Component {...pageProps} />
               
