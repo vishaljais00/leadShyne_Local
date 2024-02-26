@@ -2,6 +2,7 @@ import Head from 'next/head'
 import SideBar from '../Components/Basics/SideBar'
 import Topnav from '../Components/Basics/Topnav'
 import AccountViewScreen from '../Components/AccountScreens/AccountViewScreen'
+import withUser from '../HOC/WithUserhoc'
 
 function AccountView() {
   return (
@@ -23,4 +24,4 @@ function AccountView() {
   )
 }
 
-export default AccountView(AccountView);
+export default withUser(AccountView);
