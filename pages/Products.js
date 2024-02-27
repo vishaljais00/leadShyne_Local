@@ -1,25 +1,22 @@
-import Head from 'next/head'
-import AccountScreen from '../Components/AccountScreens/AccountScreen'
-import SideBar from '../Components/Basics/SideBar'
-import Topnav from '../Components/Basics/Topnav'
 import ProductScreen from '../Components/ProductScreens/ProductScreen'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { setCookie } from 'cookies-next'
+import withUser from '../HOC/WithUserhoc'
+import { setIsActive } from '../store/isActiveSidebarSlice'
 
-export default function Products() {
+export default withUser (function Products() {
+    const dispatch = useDispatch()
+  useEffect(() => {
+      setCookie('isActive', 'product')
+      dispatch(setIsActive('product'))
+  }, []);
     return (
         <>
-            <Head>
-                <title>LeadShyne</title>
-                <meta name="description" content="Leadshyne CMS" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <main className="main_wrapper">
-                <Topnav />
-                <div className="content_wrapper">
-                    <SideBar isactive='product'/>
+           
                     <ProductScreen />
-                </div>
-            </main>
+            
         </>
     )
 }
+)

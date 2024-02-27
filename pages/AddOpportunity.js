@@ -1,24 +1,21 @@
-import Head from 'next/head'
-import SideBar from '../Components/Basics/SideBar'
-import Topnav from '../Components/Basics/Topnav'
+import { useDispatch } from 'react-redux';
 import AddOpportunityScreen from '../Components/OpportunityScreens/AddOpportunityScreen'
+import withUser from '../HOC/WithUserhoc';
+import { useEffect } from 'react';
+import { setCookie } from 'cookies-next';
+import { setIsActive } from '../store/isActiveSidebarSlice';
 
-export default function AddOpportunity() {
+ function AddOpportunity() {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        setCookie('isActive', 'opportunity')
+        dispatch(setIsActive('opportunity'))
+    }, []);
     return (
         <>
-            <Head>
-                <title>LeadShyne</title>
-                <meta name="description" content="Leadshyne CMS" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <main className="main_wrapper">
-                <Topnav />
-                <div className="content_wrapper">
-                    <SideBar isactive='opportunity' />
-                    <AddOpportunityScreen />
-                </div>
-            </main>
+                    <AddOpportunityScreen />  
         </>
     )
 }
+
+export default withUser(AddOpportunity)

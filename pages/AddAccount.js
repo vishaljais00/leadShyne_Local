@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { setCookie } from 'cookies-next'
 import { setIsActive } from '../store/isActiveSidebarSlice'
 import withUser from '../HOC/WithUserhoc'
+import { useEffect } from 'react'
 
 function AddAccount() {
     const dispatch = useDispatch()

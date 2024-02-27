@@ -1,24 +1,21 @@
-import Head from 'next/head'
-import SideBar from '../Components/Basics/SideBar'
-import Topnav from '../Components/Basics/Topnav'
+import { useDispatch } from 'react-redux';
 import AddTaxPage from '../Components/TaxScreen/AddTaxPage'
+import withUser from '../HOC/WithUserhoc'
+import { useEffect } from 'react';
+import { setCookie } from 'cookies-next';
+import { setIsActive } from '../store/isActiveSidebarSlice';
 
-export default function AdditionTaxPage() {
+ function AdditionTaxPage() {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        setCookie('isActive', 'tasks')
+        dispatch(setIsActive('tasks'))
+    }, []);
     return (
-        <>
-            <Head>
-                <title>LeadShyne</title>
-                <meta name="description" content="Leadshyne CMS" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <main className="main_wrapper">
-                <Topnav />
-                <div className="content_wrapper">
-                    <SideBar isactive='tasks' />
+        <>  
                     <AddTaxPage/>
-                </div>
-            </main>
         </>
     )
 }
+
+export default withUser(AdditionTaxPage)

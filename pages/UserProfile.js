@@ -3,16 +3,23 @@ import { useEffect, useState } from 'react'
 import SideBar from '../Components/Basics/SideBar';
 import Topnav from '../Components/Basics/Topnav';
 import { useDispatch } from 'react-redux'
-import { getCookie, hasCookie } from 'cookies-next';
+import { getCookie, hasCookie, setCookie } from 'cookies-next';
 import { Baseurl } from '../Utils/Constants';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import UserProfileScreen from '../Components/ProfileScreens.js/UserProfileScreen';
 import UserEditProfile from '../Components/ProfileScreens.js/UserEditProfile';
+import { setIsActive } from '../store/isActiveSidebarSlice';
+import withUser from '../HOC/WithUserhoc';
 
 
-export default function UserProfile() {
+ function UserProfile() {
+     
     const dispatch = useDispatch()
+    useEffect(() => {
+        setCookie('isActive', 'taxManage')
+        dispatch(setIsActive('taxManage'))
+    }, []);
     const [editMode, setEditMode] = useState(false)
     const [userData, setUserData] = useState({})
 
@@ -52,21 +59,10 @@ export default function UserProfile() {
 
     return (
         <>
-            <Head>
-                <title>LeadShyne</title>
-                <meta name="description" content="Leadshyne CMS" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <main className="main_wrapper">
-                <Topnav />
-                <div className="content_wrapper">
-                    <SideBar />
-
                     {editMode ? <UserEditProfile userData={userData} setEditMode={setEditMode} />
                         : <UserProfileScreen userData={userData} setEditMode={setEditMode} />}
-                </div>
-            </main>
         </>
     )
 }
+
+export default withUser(UserProfile)

@@ -2,23 +2,25 @@ import Head from 'next/head'
 import SideBar from '../Components/Basics/SideBar'
 import Topnav from '../Components/Basics/Topnav'
 import ContactScreen from '../Components/ContactScreens/ContactScreen'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { setCookie } from 'cookies-next'
+import withUser from '../HOC/WithUserhoc'
+import { setIsActive } from '../store/isActiveSidebarSlice'
 
-export default function Contacts() {
+ function Contacts() {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        setCookie('isActive', 'contact')
+        dispatch(setIsActive('contact'))
+    }, []);
     return (
         <>
-            <Head>
-                <title>LeadShyne</title>
-                <meta name="description" content="Leadshyne CMS" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <main className="main_wrapper">
-                <Topnav />
-                <div className="content_wrapper">
-                    <SideBar isactive='contact' />
+           
                     <ContactScreen />
-                </div>
-            </main>
+              
         </>
     )
 }
+
+export default withUser(Contacts)

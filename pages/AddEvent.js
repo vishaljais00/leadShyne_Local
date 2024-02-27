@@ -1,24 +1,21 @@
-import Head from 'next/head'
-import SideBar from '../Components/Basics/SideBar'
-import Topnav from '../Components/Basics/Topnav'
+import { useEffect } from 'react';
 import AddEventScreen from '../Components/EventScreen/AddEventScreen'
+import withUser from '../HOC/WithUserhoc';
+import { setCookie } from 'cookies-next';
+import { useDispatch } from 'react-redux';
+import { setIsActive } from '../store/isActiveSidebarSlice';
 
-export default function AddEvent() {
+ function AddEvent() {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        setCookie('isActive', 'tasks')
+        dispatch(setIsActive('tasks'))
+    }, []);
     return (
         <>
-            <Head>
-                <title>LeadShyne</title>
-                <meta name="description" content="Leadshyne CMS" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <main className="main_wrapper">
-                <Topnav />
-                <div className="content_wrapper">
-                    <SideBar isactive='tasks' />
-                    <AddEventScreen />
-                </div>
-            </main>
+                    <AddEventScreen /> 
         </>
     )
 }
+
+export default withUser(AddEvent)

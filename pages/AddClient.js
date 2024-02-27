@@ -6,8 +6,9 @@ import { adminMode } from '../store/dbModeSlice'
 import SideBar from '../Components/Basics/SideBar'
 import Topnav from '../Components/Basics/Topnav'
 import AddClientScreen from '../Components/SuperAdminScreen/AddClientScreen'
+import withAdmin from '../HOC/Withhoc';
 
-export default function AddClient() {
+ function AddClient() {
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -34,3 +35,5 @@ export default function AddClient() {
         </>
     )
 }
+
+export default withAdmin(AddClient)

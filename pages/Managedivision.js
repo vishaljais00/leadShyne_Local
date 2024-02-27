@@ -1,24 +1,20 @@
-import Head from 'next/head'
-import SideBar from '../Components/Basics/SideBar'
-import Topnav from '../Components/Basics/Topnav'
 import ManageDivisionScreen from '../Components/ManageDivisionScreens/ManageDivisionScreen'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import { setCookie } from 'cookies-next'
+import withUser from '../HOC/WithUserhoc'
+import { setIsActive } from '../store/isActiveSidebarSlice'
 
-export default function Managedivision() {
+export default withUser (function Managedivision() {
+  const dispatch = useDispatch()
+  useEffect(() => {
+      setCookie('isActive', 'organization')
+      dispatch(setIsActive('organization'))
+  }, []);
   return (
     <>
-      <Head>
-        <title>LeadShyne</title>
-        <meta name="description" content="Leadshyne CMS" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className="main_wrapper">
-        <Topnav />
-        <div className="content_wrapper">
-          <SideBar isactive='organization' />
           <ManageDivisionScreen />
-        </div>
-      </main>
     </>
   )
 }
+)

@@ -1,24 +1,22 @@
-import Head from 'next/head'
-import SideBar from '../Components/Basics/SideBar'
-import Topnav from '../Components/Basics/Topnav'
-import ManageQuotationStatusScreen from '../Components/QuotationStatusScreen/ManageQuotationStatusScreen'
 
-export default function ManageQuotationStatus() {
+import ManageQuotationStatusScreen from '../Components/QuotationStatusScreen/ManageQuotationStatusScreen'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { setCookie } from 'cookies-next'
+import withUser from '../HOC/WithUserhoc'
+import { setIsActive } from '../store/isActiveSidebarSlice'
+
+export default withUser( function ManageQuotationStatus() {
+    const dispatch = useDispatch()
+  useEffect(() => {
+      setCookie('isActive', 'QuotationsManage')
+      dispatch(setIsActive('QuotationsManage'))
+  }, []);
     return (
         <>
-            <Head>
-                <title>LeadShyne</title>
-                <meta name="description" content="Leadshyne CMS" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-            <main className="main_wrapper">
-                <Topnav />
-                <div className="content_wrapper">
-                    <SideBar isactive='QuotationsManage' />
+           
                     <ManageQuotationStatusScreen />
-                </div>
-            </main>
+ 
         </>
     )
-}
+})

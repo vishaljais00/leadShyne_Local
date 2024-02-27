@@ -11,7 +11,7 @@ const withUser = (WrappedComponent) => {
     
 
     useEffect(() => {
-      // If the user is not loading and not authenticated and not on the login page, redirect to login
+      
       if (hasCookie("SaLsUsr")) {
         router.push('/Admin');
       }else if(!hasCookie("user")){
@@ -22,9 +22,6 @@ const withUser = (WrappedComponent) => {
       }
       
     }, [userLogin]);
-
-    // Render the wrapped component only if authenticated and not on the login page
- 
 
     return rendercomponent ? <WrappedComponent {...rest} /> : null ;
   };

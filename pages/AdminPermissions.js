@@ -6,9 +6,10 @@ import { adminMode } from '../store/dbModeSlice'
 import SideBar from '../Components/Basics/SideBar'
 import Topnav from '../Components/Basics/Topnav'
 import AdminPermissionScreen from '../Components/SuperAdminScreen/AdminPermissionScreen';
+import withAdmin from '../HOC/Withhoc';
 
 
-export default function AdminPermissions() {
+ function AdminPermissions() {
     const [isLoggedIn, setisLoggedIn] = useState(false)
     const dispatch = useDispatch()
     const dbMode = useSelector((state) => state.dbMode.value)
@@ -38,3 +39,5 @@ export default function AdminPermissions() {
         </>
     )
 }
+
+export default withAdmin(AdminPermissions)
